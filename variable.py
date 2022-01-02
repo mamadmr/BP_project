@@ -35,7 +35,7 @@ class Date:
         self.week_day = days[intDay]
 
     def show(self) -> tuple:
-        """return year/month/day hour:minut weekday"""
+        """return year/month/day hour:minute weekday"""
         return f"{self.year}/{self.month}/{self.day}", f"{self.hour}:{self.minute}", self.week_day
 
 
@@ -52,9 +52,24 @@ class PaymentMethod:
         self.number = number
 
 class Expense:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, amount: int, place: Place, date: Date, explanation: str,
+                 person: Person, payment_method: PaymentMethod, discount: int)  -> None:
+        self.amount = amount
+        self.place = place
+        self.date = date
+        self.explanation = explanation
+        self.person = person
+        self.payment_method = payment_method
+        self.discount = discount
 
 if __name__ == "__main__":
-    today = Date(2022, 1, 2, 21, 38)
-    print(*today.show(), sep=' - ')
+    date = Date(2022, 1, 2, 21, 38)
+    print(*date.show(), sep=' - ')
+    amount = 1000
+    place = Place("Amazon", 0, 'www.amazon.de')
+    explanation = 'buy some pens and notebooks'
+    person = Person("Mohammad Mahdi Reisi", 19, 'male')
+    payment_method = PaymentMethod("visa card", '1234-5678-1234-1234')
+    discount = 0
+    expense = Expense(amount, place, date, explanation, person, payment_method, discount)
+    print(expense.date.hour)
