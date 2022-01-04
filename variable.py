@@ -7,7 +7,9 @@
     PaymentMethod -> a class that each object contains a way to pay for purchase for instance a bank name   
 """
 
+from _typeshed import Self
 import datetime
+import sqlite3
 
 
 class Place:
@@ -19,6 +21,17 @@ class Place:
         self.name = name
         self.distance = distance
         self.address = address
+    
+    def add_to_database(self):
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""
+        INSERT INTO places(name, address, distace)
+        VALUES("{self.name}", "{self.address}",{self.distance});
+        """)
+
+        data.commit()
+        data.close()
 
 class Date:
     def __init__(self, year: int, month: int, day: int) -> None:
