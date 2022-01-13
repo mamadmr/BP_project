@@ -1,39 +1,28 @@
 import variable
 import sqlite3
 
-class SearchPerson:
+class SearchPaymentMethod:
     def __init__(self) -> None:
-        self.ids = [] 
-    
-    def by_name(self, name: str) -> None:
+        self.ids = []
+
+    def by_name(self, name: str):
         """search for special name in the table"""
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
-        cur.execute(f"""SELECT id FROM persons
+        cur.execute(f"""SELECT id FROM payment_methods
                                 WHERE name = "{name}";
         """)
         self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
         data.close()
-    
-    def by_age(self, age_down: int=-10, age_up: int = 1000) -> None:
-        """search for ages between age_down and age_up"""
+
+    def by_number(self, number: str):
+        """search for special number in the table"""
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
-        cur.execute(f"""SELECT id FROM persons
-                                WHERE {age_down} <= age
-                                AND {age_up} >= age;
-        """)
-        self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
-        data.close()
-
-    def by_gender(self, gender: str) -> None:
-        """search for genders -> male and female"""
-        data = sqlite3.connect('data.db')
-        cur = data.cursor()
-        cur.execute(f"""SELECT id FROM persons
-                                WHERE gender = "{gender}"
+        cur.execute(f"""SELECT id FROM payment_methods
+                                WHERE number = "{number}";
         """)
         self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
         data.close()
@@ -44,12 +33,12 @@ class SearchPerson:
         for i in self.ids:
             temp = temp.intersection(set(i))
         return tuple(temp)
-
+    
     def make_object(self, data: tuple) -> list:
-        """make person objects from ids and return the list of objects"""
+        """make objects from ids and return the list of objects"""
         ans = []
         for i in data:
-            temp = variable.Person(i[1], i[2], i[3])
+            temp = variable.PaymentMethod(i[1], i[2])
             temp.id = i[0]
             temp.added = 1
             ans.append(temp)
@@ -60,21 +49,19 @@ class SearchPerson:
         ids = self.transport()
         if(len(ids) == 1):
             ids = '(' + str(ids[0]) + ')'
+    
         data = sqlite3.connect('data.db')
         cur = data.cursor()
-        cur.execute(f"""SELECT * FROM persons
+        cur.execute(f"""SELECT * FROM payment_methods
                                 WHERE id IN {ids};
         """)
         ans = self.make_object(cur.fetchall())
         data.close()
         return ans
 
-
 if __name__ == "__main__":
-    person = SearchPerson()
-    #person.by_name("sara 0")
-    person.by_age(age_down=5, age_up=13)
-    person.by_gender("male")
-    for i in person.run():
-        print(i.name, i.age)
-    # print(person.ids)
+    pay = SearchPaymentMethod()
+    pay.by_name("visa card")
+    pay.by_number("64")
+    for i in pay.run():
+        print(i.id, i.name, i.number)

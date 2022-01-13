@@ -243,7 +243,7 @@ if __name__ == "__main__":
     person = Person("Mohammad Mahdi Reisi", 10, 'male')
     person.add_to_database()
 
-    payment_method = PaymentMethod("visa card", '1234-5678-1234-1234')
+    payment_method = PaymentMethod("visa card", '1234567812341234')
     payment_method.add_to_database()
 
     expense = Expense(amount, place, date, explanation, person, payment_method, discount)
