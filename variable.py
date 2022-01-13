@@ -39,6 +39,21 @@ class Place:
         self.id = cur.lastrowid
         data.commit()
         data.close()
+    
+    def remove_from_database(self):
+        """remove the object from data base"""
+        if self.added == 0:
+            return
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""DELETE FROM places
+                        WHERE id = {self.id}
+        """)
+        self.add = 0
+        self.id = -1
+        data.commit()
+        data.close()
 
 class Date:
     def __init__(self, year: int, month: int, day: int) -> None:
@@ -76,6 +91,21 @@ class Date:
         self.id = cur.lastrowid
         data.commit()
         data.close()
+    
+    def remove_from_database(self):
+        """remove the object from data base"""
+        if self.added == 0:
+            return
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""DELETE FROM dates
+                        WHERE id = {self.id}
+        """)
+        self.add = 0
+        self.id = -1
+        data.commit()
+        data.close()
 
 class Person:
     def __init__(self, name: str, age: int, gender: str) -> None:
@@ -100,6 +130,21 @@ class Person:
         self.id = cur.lastrowid
         data.commit()
         data.close()
+    
+    def remove_from_database(self):
+        """remove the object from data base"""
+        if self.added == 0:
+            return
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""DELETE FROM persons
+                        WHERE id = {self.id}
+        """)
+        self.add = 0
+        self.id = -1
+        data.commit()
+        data.close()
 
 class PaymentMethod:
     def __init__(self, name: str, number:str) -> None:
@@ -120,6 +165,21 @@ class PaymentMethod:
         """)
 
         self.id = cur.lastrowid
+        data.commit()
+        data.close()
+    
+    def remove_from_database(self):
+        """remove the object from data base"""
+        if self.added == 0:
+            return
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""DELETE FROM payment_methods
+                        WHERE id = {self.id}
+        """)
+        self.add = 0
+        self.id = -1
         data.commit()
         data.close()
 
@@ -145,10 +205,25 @@ class Expense:
         cur = data.cursor()
         cur.execute(f"""
             INSERT INTO expenses(amount, explanation, discount, place, date, person, payment_method)
-            VALUES("{self.amount}", "{self.explanation}", {self.discount}
+            VALUES({self.amount}, "{self.explanation}", {self.discount}
             , {self.place.id}, {self.date.id}, {self.person.id}, {self.payment_method.id});
         """)
         self.id = cur.lastrowid
+        data.commit()
+        data.close()
+    
+    def remove_from_database(self):
+        """remove the object from data base"""
+        if self.added == 0:
+            return
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""DELETE FROM expenses
+                        WHERE id = {self.id}
+        """)
+        self.add = 0
+        self.id = -1
         data.commit()
         data.close()
 
@@ -157,7 +232,6 @@ if __name__ == "__main__":
 
     date = Date(2022, 1, 2)
     date.add_to_database()
-#    print(*date.show(), sep=' - ')
 
     amount = 1000
     explanation = 'buy some pens and notebooks'
@@ -175,4 +249,9 @@ if __name__ == "__main__":
     expense = Expense(amount, place, date, explanation, person, payment_method, discount)
     expense.add_to_database()
 
-    print(expense.date.week_day)
+    # place.remove_from_database()
+    # date.remove_from_database()
+    # person.remove_from_database()
+    # payment_method.remove_from_database()
+    # expense.remove_from_database()
+

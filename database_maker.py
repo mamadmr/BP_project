@@ -2,7 +2,6 @@
 import sqlite3
 
 def run():
-
 	data = sqlite3.connect('data.db')
 	cur = data.cursor()
 
