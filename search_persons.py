@@ -72,9 +72,9 @@ class SearchPerson:
 
 if __name__ == "__main__":
     person = SearchPerson()
-    #person.by_name("sara 0")
+    person.by_name("sara 0")
     person.by_age(age_down=5, age_up=13)
     person.by_gender("male")
     for i in person.run():
         print(i.name, i.age)
-    # print(person.ids)
+    print(person.ids)

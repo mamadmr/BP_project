@@ -249,6 +249,9 @@ if __name__ == "__main__":
     expense = Expense(amount, place, date, explanation, person, payment_method, discount)
     expense.add_to_database()
 
+    for i in range(1, 12):
+        date = Date(2000+i, i, 2*i)
+        date.add_to_database()
     # place.remove_from_database()
     # date.remove_from_database()
     # person.remove_from_database()
