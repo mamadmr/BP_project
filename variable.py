@@ -240,7 +240,7 @@ if __name__ == "__main__":
     place = Place("Amazon", 0, 'www.amazon.de')
     place.add_to_database()
 
-    person = Person("Mohammad Mahdi Reisi", 13, 'male')
+    person = Person("Mohammad Mahdi Reisi", 10, 'male')
     person.add_to_database()
 
     payment_method = PaymentMethod("visa card", '1234-5678-1234-1234')
