@@ -1,13 +1,29 @@
 # BP_project
 an app aims to manage families expenses, it's just a simple object-oriented program 
 ## tables
-### places:
-		id integer
-		name text
-		address text
+####  places:
+		id integer PRIMARY KEY,
+		name text NOT NULL,
+		address text NOT NULL,
 		distance integer
 
+#### persons:
+		id integer PRIMARY KEY,
+		name text NOT NULL,
+		age integer,
+		gender text
 
+#### dates: 
+		id integer PRIMARY KEY,
+		year integer,
+		month integer,
+		day integer,
+		weekday text NOT NULL
+
+#### payment_methods
+		id integer PRIMARY KEY,
+		name text NOT NULL,
+		number text NOT NULL
 ## files 
 
 ### data.db 
