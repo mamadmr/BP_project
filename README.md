@@ -57,3 +57,8 @@ this file contains the classes that used as datatype in the whole program
 		class Person(name, age, gennder)
 		class PaymentMethod(name, number)
 		class Expense(amount, explanation, dicount, place, date, person, payment_method)
+
+
+### search_persons 
+this file contains a class, named SearchPerson  you can search for persons in a different ways with name or age or evern gender
+
