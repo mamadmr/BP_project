@@ -7,6 +7,6 @@
 this file is a main database file, I used sqlite3 as database 
 
 ### database_maker.py
-this file is just to make tables in database if they don't exist
+this file is just to make tables in database if they don't exist,\n
 it contains "run" function that makes tables run it without any worried if the table exist it won't do anything 
 
