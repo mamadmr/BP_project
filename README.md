@@ -36,3 +36,10 @@ this file is just to make tables in database if they don't exist.
 
 it contains "run" function that makes tables, run it without any worried, if the tables exist it won't do anything 
 
+### variable.py
+this file contains the classes that used as datatype in the whole program 
+	class Place
+	class Date
+	class Person
+	class PaymentMethod
+	class Expense
