@@ -1,6 +1,3 @@
-from calendar import c
-from telnetlib import SE
-from search_persons import SearchPerson
 import variable
 import sqlite3
 
@@ -43,7 +40,7 @@ class SearchDate:
         ids = tuple(self.ids[0])
         if(len(ids) == 1):
             ids = '(' + str(ids[0]) + ')'
-            
+
         data = sqlite3.connect('data.db')
         cur = data.cursor()
         cur.execute(f"""SELECT * FROM dates
