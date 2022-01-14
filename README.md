@@ -24,6 +24,19 @@ an app aims to manage families expenses, it's just a simple object-oriented prog
 		id integer PRIMARY KEY,
 		name text NOT NULL,
 		number text NOT NULL
+#### expenses 
+		id integer PRIMARY KEY,
+		amount integer,
+		explanation text,
+		discount integer,
+		place integer NOT NULL,
+		date integer NOT NULL,
+		person integer NOT NULL,
+		payment_method integer NOT NULL,
+		FOREIGN KEY (place) REFERENCES places(id),
+		FOREIGN KEY (date) REFERENCES dates(id),
+		FOREIGN KEY (person) REFERENCES persons(id),
+		FOREIGN KEY (payment_method) REFERENCES payment_methods(id)
 ## files 
 
 ### data.db 
@@ -39,8 +52,8 @@ it contains "run" function that makes tables, run it without any worried, if the
 ### variable.py
 this file contains the classes that used as datatype in the whole program 
 
-		class Place
-		class Date
-		class Person
-		class PaymentMethod
-		class Expense
+		class Place(name, distance, address)
+		class Date(year, month, day)
+		class Person(name, age, gennder)
+		class PaymentMethod(name, number)
+		class Expense(amount, explanation, dicount, place, date, person, payment_method)
