@@ -38,6 +38,7 @@ it contains "run" function that makes tables, run it without any worried, if the
 
 ### variable.py
 this file contains the classes that used as datatype in the whole program 
+
 	class Place
 	class Date
 	class Person
