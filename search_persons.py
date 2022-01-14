@@ -1,12 +1,13 @@
 import variable
 import sqlite3
 
-class SearchPerson:
+class SearchPerson: 
     def __init__(self) -> None:
+        """this class is for Search in a different way for some Persons"""
         self.ids = [] 
     
     def by_name(self, name: str) -> None:
-        """search for special name in the table"""
+        """search for special name in the table (just one name)"""
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -40,6 +41,9 @@ class SearchPerson:
 
     def transport(self) -> tuple:
         """intersections ids and return the ids that exist in all list"""
+        if len(self.ids) == 0:
+            return ()
+ 
         temp = set(self.ids[0])
         for i in self.ids:
             temp = temp.intersection(set(i))
@@ -58,8 +62,11 @@ class SearchPerson:
     def run(self) -> list:
         """do the main job and return the answer as a list of objects"""
         ids = self.transport()
-        if(len(ids) == 1):
+        if len(ids) == 1:
             ids = '(' + str(ids[0]) + ')'
+        if len(ids) == 0:
+            return []
+    
         data = sqlite3.connect('data.db')
         cur = data.cursor()
         cur.execute(f"""SELECT * FROM persons
