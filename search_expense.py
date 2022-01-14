@@ -106,7 +106,7 @@ class SearchExpense:
             ans.append(temp)
         return ans
 
-    def run(self) -> list:
+    def run(self) -> list: 
         """do the main job and return the answer as a list of objects"""
         ids = self.transport()
         if(len(ids) == 1):

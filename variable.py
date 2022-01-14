@@ -1,12 +1,3 @@
-"""
-    in this file, we have some classes that use as a variable in the entire program 
-    Expense       -> a class that each object contains a purchase
-    Place         -> a class that each object contains a shop or a website or an organization
-    Date          -> a class that each object contains a specific time which distinct by year, month, day, week day
-    Person        -> a class that each object contains a family member
-    PaymentMethod -> a class that each object contains a way to pay for purchase for instance a bank name   
-"""
-
 import datetime
 import sqlite3
 import database_maker
@@ -16,7 +7,8 @@ class Place:
         """
             the place could be a website or a shop or an organization 
             if the place is website put 0 as distance
-            if the variable added is equal to one then means this place added to data base 
+            if the variable "added" is equal to one, means this object is in the database 
+            if "id" is equal to -1 means this object is not in database yet
         """
         self.name = name
         self.distance = distance
@@ -24,10 +16,13 @@ class Place:
         self.added = 0
         self.id = -1
 
-    def add_to_database(self)-> None:
-        """just to add the object to database if it didn't add to database"""
-        if self.added:
-            return
+    def add_to_database(self)-> bool:
+        """just to add the object to database if it hasn't added to database yet 
+            return 1 if the object added and return 0 if the object exist in the database"""
+        if self.added == 1:
+            # check if the object isn't in database
+            return 0
+
         self.added = 1
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -39,21 +34,25 @@ class Place:
         self.id = cur.lastrowid
         data.commit()
         data.close()
+        return 1
     
-    def remove_from_database(self):
-        """remove the object from data base"""
+    def remove_from_database(self) -> bool:
+        """remove the object from data base if it's in the database
+        return 1 if the object removed and return 0 if the object is not exists in the database"""
         if self.added == 0:
-            return
+            # check if the object is exist in database
+            return 0
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
         cur.execute(f"""DELETE FROM places
-                        WHERE id = {self.id}
+                        WHERE id = {self.id};
         """)
-        self.add = 0
+        self.added = 0
         self.id = -1
         data.commit()
         data.close()
+        return 1
 
 class Date:
     def __init__(self, year: int, month: int, day: int) -> None:
@@ -75,11 +74,12 @@ class Date:
         """return year/month/day hour:minute weekday"""
         return f"{self.year}/{self.month}/{self.day}", self.week_day
 
+    def add_to_database(self)-> bool:
+        """just to add the object to database if it's not exist if the object is not in 
+        database return 1 else return 1"""
 
-    def add_to_database(self)-> None:
-        """just to add the object to database"""
-        if self.added:
-            return
+        if self.added == 1:
+            return 0
         self.added = 1
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -91,21 +91,24 @@ class Date:
         self.id = cur.lastrowid
         data.commit()
         data.close()
-    
-    def remove_from_database(self):
-        """remove the object from data base"""
+        return 1
+
+    def remove_from_database(self) -> bool:
+        """remove the object from data base
+           if the job has done return 1 else return 0"""
         if self.added == 0:
-            return
+            return 0
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
         cur.execute(f"""DELETE FROM dates
-                        WHERE id = {self.id}
+                        WHERE id = {self.id};
         """)
-        self.add = 0
+        self.added = 0
         self.id = -1
         data.commit()
         data.close()
+        return 1
 
 class Person:
     def __init__(self, name: str, age: int, gender: str) -> None:
@@ -116,10 +119,12 @@ class Person:
         self.added = 0
         self.id = -1
 
-    def add_to_database(self)-> None:
-        """just to add the object to database"""
-        if self.added:
-            return
+    def add_to_database(self)-> bool:
+        """just to add the object to database if every thing done good return 1 else return 0"""
+        if self.added == 1:
+            # check if the object not exist in database
+            return 0
+    
         self.added = 1
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -130,32 +135,38 @@ class Person:
         self.id = cur.lastrowid
         data.commit()
         data.close()
-    
-    def remove_from_database(self):
-        """remove the object from data base"""
+        return 1
+
+    def remove_from_database(self) -> bool:
+        """remove the object from data base if the job has done return 1 else return 0"""
         if self.added == 0:
-            return
+            return 0
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
         cur.execute(f"""DELETE FROM persons
-                        WHERE id = {self.id}
+                        WHERE id = {self.id};
         """)
         self.add = 0
         self.id = -1
         data.commit()
         data.close()
+        return 1
 
 class PaymentMethod:
-    def __init__(self, name: str, number:str) -> None:
+    def __init__(self, name: str, number:str='0000') -> None:
         """if the payment method doesn't have any number, use "0000" as number"""
         self.name = name
         self.number = number
         self.added = 0
         self.id = -1
 
-    def add_to_database(self)-> None:
-        """just to add the object to database"""
+    def add_to_database(self)-> bool:
+        """just to add the object to database if job has done well return 1 else return 0"""
+        if self.added == 1:
+            # check if the object exist in database
+            return 0
+        
         self.added = 1
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -167,25 +178,29 @@ class PaymentMethod:
         self.id = cur.lastrowid
         data.commit()
         data.close()
-    
-    def remove_from_database(self):
-        """remove the object from data base"""
+        return 1
+
+    def remove_from_database(self) -> bool:
+        """remove the object from data base return 1 if the job has been done well else return 0"""
         if self.added == 0:
-            return
+            # check if the object is not exist in database
+            return 0
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
         cur.execute(f"""DELETE FROM payment_methods
-                        WHERE id = {self.id}
+                        WHERE id = {self.id};
         """)
-        self.add = 0
+        self.added = 0
         self.id = -1
         data.commit()
         data.close()
+        return 1
 
 class Expense:
     def __init__(self, amount: int, place: Place, date: Date, explanation: str,
                  person: Person, payment_method: PaymentMethod, discount: int)  -> None:
+        """each object contains an expense with it's information"""
         self.amount = amount
         self.place = place
         self.date = date
@@ -196,10 +211,12 @@ class Expense:
         self.added = 0
         self.id = -1
 
-    def add_to_database(self)-> None:
-        """just to add the object to database"""
-        if self.added:
-            return
+    def add_to_database(self)-> bool:
+        """just to add the object to database
+            return 1 if the job has been done well else return 0"""
+        if self.added == 1:
+            return 0
+
         self.added = 1
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -211,21 +228,25 @@ class Expense:
         self.id = cur.lastrowid
         data.commit()
         data.close()
-    
-    def remove_from_database(self):
-        """remove the object from data base"""
+        return 1
+
+    def remove_from_database(self)-> bool:
+        """remove the object from data base
+        return 1 if the job has been done well else return 0"""
+
         if self.added == 0:
-            return
+            return 0
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
         cur.execute(f"""DELETE FROM expenses
                         WHERE id = {self.id}
         """)
-        self.add = 0
+        self.added = 0
         self.id = -1
         data.commit()
         data.close()
+        return 1
 
 if __name__ == "__main__":
     database_maker.run()
