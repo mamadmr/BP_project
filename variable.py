@@ -240,7 +240,7 @@ class Expense:
         data = sqlite3.connect('data.db')
         cur = data.cursor()
         cur.execute(f"""DELETE FROM expenses
-                        WHERE id = {self.id}
+                        WHERE id = {self.id};
         """)
         self.added = 0
         self.id = -1
