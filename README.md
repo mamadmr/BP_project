@@ -39,8 +39,8 @@ an app aims to manage families expenses, it's just a simple object-oriented prog
 		FOREIGN KEY (payment_method) REFERENCES payment_methods(id)
 ## files 
 
-### data.db 
-this file is a main database file, I used sqlite3 as database 
+### data.DB 
+this file is the main database file, I used sqlite3 as database 
 
 
 
@@ -69,6 +69,7 @@ this file contains a class, named SearchDate your can search for different date 
 this file contains a class, named SearchPaymentMethod you can search for diffrent payment_methods with their name and number
 
 ### search_place 
+this file is for search for different places with different methods
 
-
-
+### search expenses
+use all other searches to find expenses that we want
