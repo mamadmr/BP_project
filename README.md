@@ -52,7 +52,7 @@ it contains "run" function that makes tables, run it without any worried, if the
 ### variable.py
 this file contains the classes that used as datatype in the whole program 
 
-		class Place(name, distance, address)
+		class Place(name, address, distance)
 		class Date(year, month, day)
 		class Person(name, age, gennder)
 		class PaymentMethod(name, number)
@@ -61,4 +61,14 @@ this file contains the classes that used as datatype in the whole program
 
 ### search_persons 
 this file contains a class, named SearchPerson  you can search for persons in a different ways with name or age or evern gender
+
+### search_date 
+this file contains a class, named SearchDate your can search for different date with different methods
+
+### search payment_methods 
+this file contains a class, named SearchPaymentMethod you can search for diffrent payment_methods with their name and number
+
+### search_place 
+
+
 
