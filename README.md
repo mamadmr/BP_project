@@ -39,8 +39,8 @@ an app aims to manage families expenses, it's just a simple object-oriented prog
 		FOREIGN KEY (payment_method) REFERENCES payment_methods(id)
 ## files 
 
-### data.db 
-this file is a main database file, I used sqlite3 as database 
+### data.DB 
+this file is the main database file, I used sqlite3 as database 
 
 
 
@@ -52,7 +52,7 @@ it contains "run" function that makes tables, run it without any worried, if the
 ### variable.py
 this file contains the classes that used as datatype in the whole program 
 
-		class Place(name, distance, address)
+		class Place(name, address, distance)
 		class Date(year, month, day)
 		class Person(name, age, gennder)
 		class PaymentMethod(name, number)
@@ -62,3 +62,14 @@ this file contains the classes that used as datatype in the whole program
 ### search_persons 
 this file contains a class, named SearchPerson  you can search for persons in a different ways with name or age or evern gender
 
+### search_date 
+this file contains a class, named SearchDate your can search for different date with different methods
+
+### search payment_methods 
+this file contains a class, named SearchPaymentMethod you can search for diffrent payment_methods with their name and number
+
+### search_place 
+this file is for search for different places with different methods
+
+### search expenses
+use all other searches to find expenses that we want
