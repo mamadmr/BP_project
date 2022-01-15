@@ -3,6 +3,7 @@ import sqlite3
 
 class SearchPaymentMethod:
     def __init__(self) -> None:
+        """search for different payment methods"""
         self.ids = []
 
     def by_name(self, name: str):

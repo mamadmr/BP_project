@@ -3,6 +3,7 @@ import sqlite3
 
 class SearchPlace:
     def __init__(self) -> None:
+        """search for places with different methods"""
         self.ids = []
     
     def by_name(self, name: str):
@@ -17,7 +18,7 @@ class SearchPlace:
         data.close()
     
     def by_distance(self, distance_down: int, distance_up: int) -> None:
-        """search for ages between age_down and age_up"""
+        """search for place with distance between distance_down and distance_up"""
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -36,7 +37,7 @@ class SearchPlace:
         return tuple(temp)
 
     def make_object(self, data: tuple) -> list:
-        """make person objects from ids and return the list of objects"""
+        """make place objects from ids and return the list of objects"""
         ans = []
         for i in data:
             temp = variable.Place(i[1], i[3], i[2])

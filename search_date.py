@@ -3,11 +3,13 @@ import sqlite3
 
 class SearchDate:
     def __init__(self) -> None:
-            self.ids = []
+        """to search about different date"""
+        self.ids = []
 
     def compar(self, year: int, month: int, day: int) -> int:
+        """give a number to each date to compar it simply"""
         return 100000 * year + 100 * month + day
-    
+
     def by_date(self, date_down = variable.Date(1900,1,1), date_up = variable.Date(3000, 1, 1)):
         """search for special date in the table"""
         date_down = self.compar(date_down.year, date_down.month, date_down.day)
@@ -16,7 +18,6 @@ class SearchDate:
         data = sqlite3.connect('data.db')
         data.create_function("compar", 3, self.compar)
         cur = data.cursor()
-
 
         cur.execute(f"""SELECT id FROM dates
                                 WHERE compar(year, month, day) >= {date_down}

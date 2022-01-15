@@ -7,10 +7,11 @@ import search_date
 
 class SearchExpense:
     def __init__(self) -> None:
+        """to search for different expense with different methods"""
         self.ids = []
     
     def by_amount(self, amount_down: int, amount_up: int) -> None:
-        """search for ages between age_down and age_up"""
+        """search for different amount between amount_down and amount_up"""
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -22,7 +23,7 @@ class SearchExpense:
         data.close()
 
     def by_discount(self, discount_down: int, discount_up: int) -> None:
-        """search for ages between age_down and age_up"""
+        """search for different discount between discount_down and discount_up"""
 
         data = sqlite3.connect('data.db')
         cur = data.cursor()
@@ -34,6 +35,7 @@ class SearchExpense:
         data.close()
 
     def by_place(self, places: list) -> None:
+        """search for different expense that bought in these places"""
         ids = tuple([i.id for i in places])
         if len(ids) == 1:
             ids = '(' + str(ids[0]) + ')'
@@ -48,6 +50,7 @@ class SearchExpense:
         data.close()
     
     def by_person(self, persons: list) -> None:
+        """search for expenses these peoples bought them"""
         ids = tuple([i.id for i in persons])
         if len(ids) == 1:
             ids = '(' + str(ids[0]) + ')'
@@ -62,6 +65,7 @@ class SearchExpense:
         data.close()
 
     def by_date(self, dates: list) -> None:
+        """search for expenses that bought in these dates """
         ids = tuple([i.id for i in dates])
         if len(ids) == 1:
             ids = '(' + str(ids[0]) + ')'
@@ -76,6 +80,7 @@ class SearchExpense:
         data.close()
     
     def by_payment_method(self, payment_methods: list) -> None:
+        """search for the expense that payed in this payment methodes"""
         ids = tuple([i.id for i in payment_methods])
         if len(ids) == 1:
             ids = '(' + str(ids[0]) + ')'
