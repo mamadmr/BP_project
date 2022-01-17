@@ -1,5 +1,6 @@
 import tkinter as tk
 import add_or_remove_person_display
+import add_or_remove_place
 
 class Menu:
     def __init__(self) -> None:
@@ -14,10 +15,17 @@ class Menu:
         person = add_or_remove_person_display.PersonAddRemove()
         person.run()
     
+    def add_or_remove_place(self):
+        place = add_or_remove_place.PlaceAddRemove()
+        place.run()
+
     def make_widgets(self) -> None:
         """make widgets"""
-        person = tk.Button(self.win, text='Add or remove person', command=self.add_or_remove_person)
+        person = tk.Button(self.win, text='Add or remove person', command=self.add_or_remove_person, height=1,width=18)
         person.place(relx=0.03, rely=0.03)
+
+        person = tk.Button(self.win, text='Add or remove place', command=self.add_or_remove_place, height=1,width=18)
+        person.place(relx=0.03, rely=0.23)
     
     def run(self)->None:
         """run the window"""
