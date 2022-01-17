@@ -6,7 +6,7 @@ class DisplayOutput:
         """this class is for display the outpus of searches"""
         self.win = tk.Tk()
         self.win.title('Display output')
-        self.win.geometry('500x300')
+        #self.win.geometry('500x300')
         self.header = header
         self.data = data
 
@@ -41,7 +41,7 @@ class DisplayOutput:
             for j in range(len(self.data)):
                 mx = max(mx, len(self.data[j][i]))
             mx = max(mx, len(self.header[i]))
-            tree.column(self.header[i],anchor=tk.CENTER, width=mx*8, stretch=tk.NO)
+            tree.column(self.header[i],anchor=tk.CENTER, width=mx*9, stretch=tk.NO)
             tree.heading(self.header[i], text=self.header[i],anchor=tk.CENTER)
         for i in range(len(self.data)):
             tree.insert(values=self.data[i],parent='',index='end',iid=i,text='') 
