@@ -177,7 +177,7 @@ class AddRemoveExpense:
         
         sch = search_expense.SearchExpense()
         if flag[0]:
-            sch.by_amount(data[0], [data[0]])
+            sch.by_amount(data[0], data[0])
         if flag[1]:
             sch.by_place([data[1]])
         
