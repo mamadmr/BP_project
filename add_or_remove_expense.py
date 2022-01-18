@@ -10,6 +10,7 @@ import search_persons
 import search_place
 import search_payment_methods
 import variable
+import search_expense
 
 class AddRemoveExpense:
     def __init__(self) -> None:
@@ -161,10 +162,69 @@ class AddRemoveExpense:
         expense = variable.Expense(data[0], data[1], data[2], data[3], data[4], data[5], data[6])
         expense.add_to_database()
         self.reset()
-        
+
     def remove_button(self) -> None:
         """this method runs when client push remove button"""
-        pass
+        for i in self.search():
+            i.remove_from_database()
+
+    def search(self):
+        data, flag = self.data_filter()
+        if len(flag) == 0:
+            self.reset()
+            return
+        
+        sch = search_expense.SearchExpense()
+        if flag[0]:
+            sch.by_amount(data[0], [data[0]])
+        if flag[1]:
+            sch.by_place([data[1]])
+        
+        if flag[2]:
+            sch.by_date([data[2]])
+
+        if flag[4]:
+            sch.by_person([data[4]])
+        
+        if flag[5]:
+            sch.by_payment_method([data[5]])
+        
+        if flag[6]:
+            sch.by_discount(data[6], data[6])
+
+        if flag[7] and flag[8]:
+            sch.by_amount(data[7], data[8])
+        elif flag[7]:
+            sch.by_amount(data[7])
+        elif flag[8]:
+            sch.by_amount(amount_up=data[8])
+
+        if flag[9] and flag[10]:
+            days = search_date.SearchDate()
+            days.by_date(data[9], data[10])
+            days = days.run()
+            sch.by_date(days)
+
+        elif flag[9]:
+            days = search_date.SearchDate()
+            days.by_date(date_down=data[9])
+            days = days.run()
+            sch.by_date(days)
+
+        elif flag[10]:
+            days = search_date.SearchDate()
+            days.by_date(date_up=data[10])
+            days = days.run()
+            sch.by_date(days)
+
+        if flag[11] and flag[12]:
+            sch.by_discount(data[11], data[12])
+        elif flag[11]:
+            sch.by_discount(discount_down=data[11])
+        elif flag[12]:
+            sch.by_discount(discount_up=data[12])
+        
+        return sch.run()
 
     def show_button(self) -> None:
         """this method run when client push show button"""
@@ -270,7 +330,6 @@ class AddRemoveExpense:
         tk.Label(self.win, text='to: ').place(relx=x+0.25, rely=y+down*9, anchor = 'center')
         self.discount_to = tk.Text(self.win,height=1,width=8)
         self.discount_to.place(relx=x+0.335, rely=y+down*9, anchor = 'w')
-
 
     def run(self)->None:
         """run the window"""

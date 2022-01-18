@@ -10,7 +10,7 @@ class SearchExpense:
         """to search for different expense with different methods"""
         self.ids = []
     
-    def by_amount(self, amount_down: int, amount_up: int) -> None:
+    def by_amount(self, amount_down: int=0, amount_up: int=1e1000) -> None:
         """search for different amount between amount_down and amount_up"""
 
         data = sqlite3.connect('data.db')
