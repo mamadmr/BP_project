@@ -16,6 +16,17 @@ class SearchPlace:
         """)
         self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
         data.close()
+
+    def by_id(self, id: int) -> None:
+        """search for special id in the table"""
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""SELECT id FROM places
+                                WHERE id = "{id}";
+        """)
+        self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
+        data.close()
     
     def by_distance(self, distance_down: int=0, distance_up: int=1e100) -> None:
         """search for place with distance between distance_down and distance_up"""

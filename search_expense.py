@@ -1,3 +1,4 @@
+from numpy import var
 import variable
 import sqlite3 
 import search_place
@@ -10,7 +11,7 @@ class SearchExpense:
         """to search for different expense with different methods"""
         self.ids = []
     
-    def by_amount(self, amount_down: int=0, amount_up: int=1e1000) -> None:
+    def by_amount(self, amount_down: int=0, amount_up: int=1e100) -> None:
         """search for different amount between amount_down and amount_up"""
 
         data = sqlite3.connect('data.db')
@@ -22,7 +23,7 @@ class SearchExpense:
         self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
         data.close()
 
-    def by_discount(self, discount_down: int, discount_up: int) -> None:
+    def by_discount(self, discount_down: int=0, discount_up: int=1e100) -> None:
         """search for different discount between discount_down and discount_up"""
 
         data = sqlite3.connect('data.db')
@@ -105,7 +106,24 @@ class SearchExpense:
         """make person objects from ids and return the list of objects"""
         ans = []
         for i in data:
-            temp = variable.Expense(i[1], i[4], i[5], i[2], i[6], i[7], i[3])
+            sch = search_persons.SearchPerson()
+            sch.by_id(i[6])
+            person_obj = sch.run()[0]
+            
+            sch = search_payment_methods.SearchPaymentMethod()
+            sch.by_id(i[7])
+            payment_opj = sch.run()[0]
+
+            sch = search_date.SearchDate()
+            sch.by_id(i[5])
+            date_obj = sch.run()[0]
+
+            sch = search_place.SearchPlace()
+            sch.by_id(i[4])
+            place_obj = sch.run()[0]
+
+            temp = variable.Expense(i[1], place_obj, date_obj, i[2], person_obj, payment_opj, i[3])
+
             temp.id = i[0]
             temp.added = 1
             ans.append(temp)

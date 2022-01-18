@@ -70,9 +70,9 @@ class Date:
         days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         self.week_day = days[intDay]
 
-    def show(self) -> tuple:
+    def show(self) -> str:
         """return year/month/day hour:minute weekday"""
-        return f"{self.year}/{self.month}/{self.day}", self.week_day
+        return f"{self.year}/{self.month}/{self.day} {self.week_day}"
 
     def add_to_database(self)-> bool:
         """just to add the object to database if it's not exist if the object is not in 

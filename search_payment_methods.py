@@ -27,6 +27,17 @@ class SearchPaymentMethod:
         """)
         self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
         data.close()
+    
+    def by_id(self, id: int) -> None:
+        """search for special id in the table"""
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""SELECT id FROM payment_methods
+                                WHERE id = "{id}";
+        """)
+        self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
+        data.close()
 
     def transport(self) -> tuple:
         """intersections ids and return the ids that exist in all list"""

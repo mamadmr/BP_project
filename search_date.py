@@ -25,6 +25,17 @@ class SearchDate:
         """)
         self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
         data.close()
+    
+    def by_id(self, id: int) -> None:
+        """search for special id in the table"""
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""SELECT id FROM dates
+                                WHERE id = "{id}";
+        """)
+        self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
+        data.close()
 
     def make_object(self, data: tuple) -> list:
         """make objects from ids and return the list of objects"""

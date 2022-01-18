@@ -17,6 +17,17 @@ class SearchPerson:
         self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
         data.close()
     
+    def by_id(self, id: int) -> None:
+        """search for special id in the table"""
+
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""SELECT id FROM persons
+                                WHERE id = "{id}";
+        """)
+        self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
+        data.close()
+    
     def by_age(self, age_down: int=-10, age_up: int = 1000) -> None:
         """search for ages between age_down and age_up"""
 

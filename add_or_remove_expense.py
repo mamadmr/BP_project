@@ -11,6 +11,7 @@ import search_place
 import search_payment_methods
 import variable
 import search_expense
+import displayoutput
 
 class AddRemoveExpense:
     def __init__(self) -> None:
@@ -228,8 +229,15 @@ class AddRemoveExpense:
 
     def show_button(self) -> None:
         """this method run when client push show button"""
-        pass
-    
+        header = ["amount", 'place', 'date', 'explanation', "person", "payment method", "discount"]
+        data = []
+        i: variable.Expense
+        for i in self.search():
+            data.append([i.amount, i.place.name, i.date.show(), i.explanation, i.person.name, i.payment_method.name, i.discount])
+
+        displayoutput.DisplayOutput(header, data).run()
+        self.reset()
+
     def add_or_remove_place(self):
         place = add_or_remove_place.PlaceAddRemove()
         place.run()
