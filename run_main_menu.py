@@ -2,6 +2,7 @@ import tkinter as tk
 import add_or_remove_person_display
 import add_or_remove_place
 import add_or_remove_payment_method
+import add_or_remove_expense
 
 class Menu:
     def __init__(self) -> None:
@@ -23,6 +24,10 @@ class Menu:
         payment = add_or_remove_payment_method.PaymentMethodAddRemove()
         payment.run()
 
+    def add_or_remove_expense(self):
+        expense = add_or_remove_expense.AddRemoveExpense()
+        expense.run()
+
     def make_widgets(self) -> None:
         """make widgets"""
         person = tk.Button(self.win, text='Add or remove person', command=self.add_or_remove_person, height=1,width=18)
@@ -34,6 +39,9 @@ class Menu:
         payment = tk.Button(self.win, text='Add or remove payment', command=self.add_or_remove_payment_method, height=1,width=18)
         payment.place(relx=0.03, rely=0.43)
     
+        payment = tk.Button(self.win, text='Add or remove expense', command=self.add_or_remove_expense, height=1,width=18)
+        payment.place(relx=0.03, rely=0.63)
+
     def run(self)->None:
         """run the window"""
         self.make_widgets()
