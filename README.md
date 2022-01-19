@@ -60,7 +60,7 @@ this file contains the classes that used as datatype in the whole program
 
 
 ### search_persons 
-this file contains a class, named SearchPerson  you can search for persons in a different ways with name or age or evern gender
+this file contains a class, named SearchPerson  you can search for persons in a different ways with name or age or even gender
 
 ### search_date 
 this file contains a class, named SearchDate your can search for different date with different methods

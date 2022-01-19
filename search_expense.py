@@ -97,6 +97,8 @@ class SearchExpense:
 
     def transport(self) -> tuple:
         """intersections ids and return the ids that exist in all list"""
+        if len(self.ids) == 0:
+            return ()
         temp = set(self.ids[0])
         for i in self.ids:
             temp = temp.intersection(set(i))
@@ -131,7 +133,11 @@ class SearchExpense:
 
     def run(self) -> list: 
         """do the main job and return the answer as a list of objects"""
+        self.by_discount()
         ids = self.transport()
+        if len(ids) == 0:
+            return []
+
         if(len(ids) == 1):
             ids = '(' + str(ids[0]) + ')'
         data = sqlite3.connect('data.db')

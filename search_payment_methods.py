@@ -41,6 +41,8 @@ class SearchPaymentMethod:
 
     def transport(self) -> tuple:
         """intersections ids and return the ids that exist in all list"""
+        if len(self.ids) == 0:
+            return ()
         temp = set(self.ids[0])
         for i in self.ids:
             temp = temp.intersection(set(i))
@@ -56,9 +58,20 @@ class SearchPaymentMethod:
             ans.append(temp)
         return ans
 
+    def all_payment(self):
+        """return all ids"""
+        data = sqlite3.connect('data.db')
+        cur = data.cursor()
+        cur.execute(f"""SELECT id FROM payment_methods""")
+        self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
+        data.close()
+
     def run(self) -> list:
         """do the main job and return the answer as a list of objects"""
+        self.all_payment()
         ids = self.transport()
+        if len(ids) == 0:
+            return [] 
         if(len(ids) == 1):
             ids = '(' + str(ids[0]) + ')'
     

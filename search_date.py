@@ -48,6 +48,7 @@ class SearchDate:
         return ans
 
     def run(self) -> list:
+        self.by_date()
         """do the main job and return the answer as a list of objects"""
         ids = tuple(self.ids[0])
         if(len(ids) == 1):

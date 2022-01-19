@@ -19,16 +19,9 @@ class SearchPerson:
     
     def by_id(self, id: int) -> None:
         """search for special id in the table"""
-
-        data = sqlite3.connect('data.db')
-        cur = data.cursor()
-        cur.execute(f"""SELECT id FROM persons
-                                WHERE id = "{id}";
-        """)
-        self.ids.append(list(map(lambda x: x[0], cur.fetchall())))
-        data.close()
+        self.ids.append([id])
     
-    def by_age(self, age_down: int=-10, age_up: int = 1000) -> None:
+    def by_age(self, age_down: int=-10, age_up: int = 100000) -> None:
         """search for ages between age_down and age_up"""
 
         data = sqlite3.connect('data.db')
@@ -71,6 +64,7 @@ class SearchPerson:
         return ans
 
     def run(self) -> list:
+        self.by_age()
         """do the main job and return the answer as a list of objects"""
         ids = self.transport()
         if len(ids) == 1:
