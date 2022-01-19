@@ -1,5 +1,4 @@
 import tkinter as tk
-from numpy import var
 from tkcalendar import DateEntry
 import add_or_remove_payment_method
 import add_or_remove_place
@@ -15,11 +14,13 @@ import displayoutput
 
 class AddRemoveExpense:
     def __init__(self) -> None:
+        """this class make and manage add or remove expense window"""
         self.win = tk.Tk()
         self.win.title('add or remove expense')
         self.win.geometry('400x500')
     
-    def read_text(self):
+    def read_text(self) -> list:
+        """read all widgets as string and return as a list """
         inp = []
         inp.append(self.amount.get("1.0",'end-1c'))
         inp.append(self.place.get("1.0",'end-1c'))
@@ -36,7 +37,8 @@ class AddRemoveExpense:
         inp.append(self.discount_to.get("1.0",'end-1c'))
         return inp
 
-    def translate_time(self, date):
+    def translate_time(self, date) -> variable.Date:
+        """check if the date exist if not make it and return date object"""
         year, month, day = date.split('/')
         year, month, day = int(year), int(month), int(day)
         date = variable.Date(year, month, day)
@@ -58,7 +60,7 @@ class AddRemoveExpense:
         
         if flag[0] and not data[0].isdigit():
             messagebox.showerror('amount Error', 'amount is not intiger')
-            return []
+            return [],[]
         
         if flag[1]:
             sch = search_place.SearchPlace()
@@ -66,7 +68,7 @@ class AddRemoveExpense:
             out = sch.run()
             if len(out) == 0:
                 messagebox.showerror('place Error', 'there is not such a place')
-                return []
+                return [],[]
             else:
                 data[1] = out[0]
         
@@ -75,7 +77,7 @@ class AddRemoveExpense:
                 data[2] = self.translate_time(data[2])
             except:
                 messagebox.showerror('date Error', 'the date is not correct')
-                return []
+                return [],[]
         
         if flag[4]:
             sch = search_persons.SearchPerson()
@@ -83,7 +85,7 @@ class AddRemoveExpense:
             out = sch.run()
             if len(out) == 0:
                 messagebox.showerror('person Error', 'there is not such a person')
-                return []
+                return [],[]
             else:
                 data[4] = out[0]
 
@@ -93,47 +95,48 @@ class AddRemoveExpense:
             out = sch.run()
             if len(out) == 0:
                 messagebox.showerror('payment method Error', 'there is not such a payment method')
-                return []
+                return [],[]
             else:
                 data[5] = out[0]
         
         if flag[6] and not data[6].isdigit():
             messagebox.showerror('discount Error', 'discount is not intiger')
-            return []
+            return [],[]
         
         if flag[7] and not data[7].isdigit():
             messagebox.showerror('amount Error', 'amount is not intiger')
-            return []
+            return [],[]
 
         if flag[8] and not data[8].isdigit():
             messagebox.showerror('amount Error', 'amount is not intiger')
-            return []
+            return [],[]
 
         if flag[9]:
             try:
                 data[9] = self.translate_time(data[9])
             except:
                 messagebox.showerror('date Error', 'the date is not correct')
-                return []
+                return [],[]
         
         if flag[10]:
             try:
                 data[10] = self.translate_time(data[10])
             except:
                 messagebox.showerror('date Error', 'the date is not correct')
-                return []
+                return [],[]
         
         if flag[11] and not data[11].isdigit():
             messagebox.showerror('discount Error', 'discount is not intiger')
-            return []
+            return [],[]
 
         if flag[12] and not data[12].isdigit():
             messagebox.showerror('discount Error', 'discount is not intiger')
-            return []
+            return [],[]
 
         return data, flag
     
-    def reset(self):
+    def reset(self) -> None:
+        """clean all data from widgets """
         self.amount.delete("1.0",'end-1c')
         self.place.delete("1.0",'end-1c')
         self.date._set_text(self.date._date.strftime(''))
@@ -170,6 +173,7 @@ class AddRemoveExpense:
             i.remove_from_database()
 
     def search(self):
+        """search for data in objects and make their objects"""
         data, flag = self.data_filter()
         if len(flag) == 0:
             self.reset()
@@ -238,11 +242,13 @@ class AddRemoveExpense:
         displayoutput.DisplayOutput(header, data).run()
         self.reset()
 
-    def add_or_remove_place(self):
+    def add_or_remove_place(self) -> None:
+        """open add or remove window of chaing place"""
         place = add_or_remove_place.PlaceAddRemove()
         place.run()
 
-    def add_or_remove_payment_method(self):
+    def add_or_remove_payment_method(self) -> None:
+        """open add or remove payment method window """
         payment = add_or_remove_payment_method.PaymentMethodAddRemove()
         payment.run()
 
@@ -252,6 +258,7 @@ class AddRemoveExpense:
         person.run()
 
     def make_widgets(self) -> None:
+        """make all widgets and fixed them"""
         x = 0.2
         y = 0.06
         down = 0.082
