@@ -4,6 +4,8 @@ import add_or_remove_place
 import add_or_remove_payment_method
 import add_or_remove_expense
 import show_diagram_person
+import show_diagram_place
+import show_diagram_payment_method
 
 class Menu:
     def __init__(self) -> None:
@@ -32,23 +34,38 @@ class Menu:
     def dig_person(self):
         show_diagram_person.PersonShow().run()
 
+    def dig_place(self):
+        show_diagram_place.PlaceShow().run()
+
+    def dig_payment(self):
+        show_diagram_payment_method.PaymentMethodShow().run()
+
     def make_widgets(self) -> None:
         """make widgets"""
         person = tk.Button(self.win, text='Add or remove person', command=self.add_or_remove_person, height=1,width=18)
         person.place(relx=0.03, rely=0.03)
 
-        person = tk.Button(self.win, text='Add or remove place', command=self.add_or_remove_place, height=1,width=18)
-        person.place(relx=0.03, rely=0.23)
+        place = tk.Button(self.win, text='Add or remove place', command=self.add_or_remove_place, height=1,width=18)
+        place.place(relx=0.03, rely=0.23)
 
         payment = tk.Button(self.win, text='Add or remove payment', command=self.add_or_remove_payment_method, height=1,width=18)
         payment.place(relx=0.03, rely=0.43)
     
-        payment = tk.Button(self.win, text='Add or remove expense', command=self.add_or_remove_expense, height=1,width=18)
-        payment.place(relx=0.03, rely=0.63)
+        expense = tk.Button(self.win, text='Add or remove expense', command=self.add_or_remove_expense, height=1,width=18)
+        expense.place(relx=0.03, rely=0.63)
 
         diagram_person = tk.Button(self.win, text='persons diagram', command=self.dig_person, height=1,width=18)
         diagram_person.place(relx=0.52, rely=0.03)
+
+        diagram_place = tk.Button(self.win, text='place diagram', command=self.dig_place, height=1,width=18)
+        diagram_place.place(relx=0.52, rely=0.23)
+
+        diagram_payment = tk.Button(self.win, text='payment digagram', command=self.dig_payment, height=1,width=18)
+        diagram_payment.place(relx=0.52, rely=0.43)
         
+        exit_ = tk.Button(self.win, text='Exit', command=self.win.destroy, height=1,width=18)
+        exit_.place(relx=0.52, rely=0.63)
+
     def run(self)->None:
         """run the window"""
         self.make_widgets()

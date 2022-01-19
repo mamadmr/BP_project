@@ -6,7 +6,7 @@ import search_date
 from tkinter import messagebox
 import search_expense
 
-class PersonShow:
+class PaymentMethodShow:
     def __init__(self) -> None:
         """this class shows a diagram for person in period of time"""
         self.win = tk.Tk()
@@ -88,16 +88,16 @@ class PersonShow:
 
     def show_button(self) -> None:
         """work when client push show button"""
-        persons = dict()
+        payments = dict()
         for i in self.search():
             i: variable.Expense
-            person = i.person.name
-            if person not in persons:
-                persons[person] = i.amount
+            payment = i.payment_method.name
+            if payment not in payments:
+                payments[payment] = i.amount
             else:
-                persons[person] += i.amount
+                payments[payment] += i.amount
         self.reset()
-        plt.bar(persons.keys(), persons.values())
+        plt.bar(payments.keys(), payments.values())
         plt.show()
 
                 
@@ -130,5 +130,5 @@ class PersonShow:
 
 
 if __name__ == "__main__":
-    dig = PersonShow()
+    dig = PaymentMethodShow()
     dig.run()
