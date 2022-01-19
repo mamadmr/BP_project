@@ -1,5 +1,16 @@
 # BP_project
 an app aims to manage families expenses, it's just a simple object-oriented program 
+
+## how to run ?
+its so simple just run the run.py file in the project 
+
+## what is the structure of the program 
+in program you can add or remove or search your family expenses 
+,first of all you should add your family member to program (use add or remove person), then you should add your family cards to the program with add or remove payment method then you have to add some shops that your family buy things there 
+then you can use add or remove expenses to add every thing you bought 
+
+at the end you can see some diagrams buy click on diagrams  
+
 ## tables
 ####  places:
 		id integer PRIMARY KEY,
@@ -37,7 +48,7 @@ an app aims to manage families expenses, it's just a simple object-oriented prog
 		FOREIGN KEY (date) REFERENCES dates(id),
 		FOREIGN KEY (person) REFERENCES persons(id),
 		FOREIGN KEY (payment_method) REFERENCES payment_methods(id)
-## files 
+## main files 
 
 ### data.DB 
 this file is the main database file, I used sqlite3 as database 
@@ -54,9 +65,9 @@ this file contains the classes that used as datatype in the whole program
 
 		class Place(name, address, distance)
 		class Date(year, month, day)
-		class Person(name, age, gennder)
+		class Person(name, age, gender)
 		class PaymentMethod(name, number)
-		class Expense(amount, explanation, dicount, place, date, person, payment_method)
+		class Expense(amount, explanation, discount, place, date, person, payment_method)
 
 
 ### search_persons 
@@ -66,7 +77,7 @@ this file contains a class, named SearchPerson  you can search for persons in a 
 this file contains a class, named SearchDate your can search for different date with different methods
 
 ### search payment_methods 
-this file contains a class, named SearchPaymentMethod you can search for diffrent payment_methods with their name and number
+this file contains a class, named SearchPaymentMethod you can search for different payment_methods with their name and number
 
 ### search_place 
 this file is for search for different places with different methods
