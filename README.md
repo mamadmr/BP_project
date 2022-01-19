@@ -5,9 +5,9 @@ an app aims to manage families expenses, it's just a simple object-oriented prog
 its so simple just run the run.py file in the project 
 
 ## what is the structure of the program 
-in program you can add or remove or search your family expenses 
-,first of all you should add your family member to program (use add or remove person), then you should add your family cards to the program with add or remove payment method then you have to add some shops that your family buy things there 
-then you can use add or remove expenses to add every thing you bought 
+in the program you can add or remove or search your family expenses 
+,first of all you should add your family members to program (use add or remove person), then you should add your family cards to the program(with add or remove payment method) then you have to add some shops that your family buy things there 
+then you can use add or remove expenses to add every thing you buy
 
 at the end you can see some diagrams buy click on diagrams  
 
