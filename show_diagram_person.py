@@ -80,6 +80,9 @@ class PersonShow:
             days = search_date.SearchDate()
             days.by_date(date_up=data[1])
             days = days.run()
+        else:
+            days = search_date.SearchDate()
+            days = days.run() 
 
         sch = search_expense.SearchExpense()
         sch.by_date(days)
